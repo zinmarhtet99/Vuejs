@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Gold Calculator Vue JS</title>
+	<script type="text/javascript" src="vue.min.js"></script>
+</head>
+<body>
+	<div id="app-6">
+		
+		Gram: <input v-model="gram"><br>
+		Perprice: <input v-model="perprice"><br>
+		<button v-on:click="calculate">Calculate</button><br>
+
+
+		Kyat:{{kyat}}<br>
+		Pae: {{pae}}<br>
+		Ywae:{{ywae}}<br>
+		Total:{{total}}
+	</div>
+	<script type="text/javascript">
+		var app6 = new Vue({
+			el: '#app-6',
+			data: {
+				gram: '',
+				perprice:'',
+				kyat:'',
+				pae:'',
+				ywae:'',
+				total:''
+			},
+			methods:{
+				calculate:function(){
+					this.kyat=parseInt(this.gram/16.606);
+					this.pae=Math.round(((this.gram/16.606)-this.kyat)*16);
+					this.ywae=(((((this.gram/16.606)-this.kyat)*16)-this.pae)*8).toFixed(2);
+
+					this.total=(this.kyat*this.perprice)+(this.pae*(this.perprice/16))+(this.ywae*(this.perprice/128));
+
+					console.log(this.kyat);
+					console.log(this.pae);
+					console.log(this.ywae);
+					console.log(this.total);
+				}
+			}
+		})
+	</script>
+</body>
+</html>

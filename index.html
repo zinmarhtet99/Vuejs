@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Vue JS</title>
+	<script type="text/javascript" src="vue.min.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+	<div id="app">
+  		{{ message }}
+  		<button v-on:click="getData">Click btn</button>
+	</div>
+
+	<script type="text/javascript">
+		var app = new Vue({
+			el: '#app',
+			data: {
+				message: 'Hello Vue!'
+			},
+			methods:{
+				getData:function(){
+					// console.log('Hello getdata function');
+					axios.get('https://api.coindesk.com/v1/bpi/currentprice.json').then(res =>(this.message=res.data.bpi));
+				}
+			}
+		})
+	</script>
+	
+</body>
+</html>

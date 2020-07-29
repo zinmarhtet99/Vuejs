@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript" src="vue.min.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+	<div id="app">
+		<h2>Title</h2>
+		
+		<div v-for="bpi in message">
+			{{bpi.description}}
+			<span class="lighten">
+				<span v-html="bpi.symbol"></span>{{ bpi.rate_float | currencydecimal }}
+			</span>
+		</div>
+		<button v-on:click="getData">Click btn</button>
+	<script type="text/javascript">
+		var app = new Vue({
+			el: '#app',
+			data: {
+				message: ''
+			},
+			filters: {
+				currencydecimal (value) {
+					return value.toFixed(2)
+				}
+			},
+			methods:{
+				getData:function(){
+					// console.log('Hello getdata function');
+					axios.get('https://api.coindesk.com/v1/bpi/currentprice.json').then(res =>(this.message=res.data.bpi));
+				}
+			}
+		})
+	</script>
+	
+</body>
+</html>
